@@ -5,44 +5,40 @@ import SignUpCss from "./SignUpCss";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-
 export default function SignUp() {
   const classes = SignUpCss();
-  var navigate=useNavigate()
+  var navigate = useNavigate();
 
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const handleNavigate=()=>{
-  navigate('/login')
-}
+  const handleNavigate = () => {
+    navigate("/login");
+  };
 
   const handleSubmit = async () => {
     var body = { fullname: Name, email: Email, password: password };
-  
-    var response = await postData("signup/usersignup", body);
-       if(response.status)
-       {
 
-        navigate('/login')
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'You Successfully Signed up',
-          showConfirmButton: false,
-          timer: 1500
-        })
-       }
-       else
-       {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'unable to signup !',
-          showConfirmButton: false,
-          timer: 1500
-        })
-       }
+    var response = await postData("signup/usersignup", body);
+    console.log("this is response", response);
+    if (response) {
+      navigate("/login");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "You Successfully Signed up",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "unable to signup !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (
@@ -100,8 +96,15 @@ const handleNavigate=()=>{
               Get Your Self Singed
             </Button>
           </Grid>
-          <Grid item xs={12} style={{ textAlign:'center' }}>
-            Already have account?< Button onClick={handleNavigate} cursor="pointer" style={{color:'blue'}}>Login</Button>
+          <Grid item xs={12} style={{ textAlign: "center" }}>
+            Already have account?
+            <Button
+              onClick={handleNavigate}
+              cursor="pointer"
+              style={{ color: "blue" }}
+            >
+              Login
+            </Button>
           </Grid>
         </Grid>
       </div>

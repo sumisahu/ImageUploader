@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import { useNavigate } from "react-router-dom";
+import LockIcon from '@mui/icons-material/Lock';
 
 export default function ImageUploader() {
   const classes = ImageUploaderCss();
@@ -18,7 +19,7 @@ var k =location.state.res.email
   //console.log("hhhhhh", location.state.res.fullname);
   const navigate=useNavigate()
 
-  const [Picture, setPicture] = useState({ bytes: "", Url: "/photo.jpg" });
+  const [Picture, setPicture] = useState({ bytes: " ", Url: "/photo.jpg" });
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState(k);
   const [btnStatus,setBtnStatus] = useState(false);
@@ -33,6 +34,11 @@ var k =location.state.res.email
   const handleReset = () => {
     setPicture({ bytes: "", Url: "/photo.jpg" });
   };
+
+
+  const handelLogin=()=>{
+    navigate('/login')
+  }
 
   const handleNavigation=()=>{
   navigate('/displayimage',{state:{res:k}})
@@ -72,9 +78,17 @@ var k =location.state.res.email
     <div className={classes.main}>
       <div className={classes.root}>
         <Grid container spacing={2}>
+        <Grid
+            item
+            xs={2}
+            style={{ fontSize: 18, textAlign: "center", fontWeight: "bold",flexDirection:"column"}}
+          >
+           <LockIcon onClick={handelLogin}/>
+         <div  cursor="pointer">logout</div>
+          </Grid>
           <Grid
             item
-            xs={10}
+            xs={8}
             style={{ fontSize: 24, textAlign: "center", fontWeight: "bold" }}
           >
             UPLOAD YOUR IMAGE
